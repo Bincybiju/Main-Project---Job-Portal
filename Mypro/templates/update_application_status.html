@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Application Status</title>
+    <!-- Add your CSS stylesheets or links here -->
+</head>
+<body>
+    <h1>Update Application Status</h1>
+
+    <form method="post" action="{% url 'update_application_status' job_application.id %}">
+        {% csrf_token %}
+        <label for="status">Status:</label>
+        <select name="status" id="status">
+            <option value="pending" {% if job_application.status == 'pending' %}selected{% endif %}>Pending</option>
+            <option value="accepted" {% if job_application.status == 'accepted' %}selected{% endif %}>Accepted</option>
+            <option value="rejected" {% if job_application.status == 'rejected' %}selected{% endif %}>Rejected</option>
+        </select>
+        <button type="submit">Update Status</button>
+        <p>Current Status: {{ job_application.status }}</p>
+        <button><a href="{% url 'manage_job_applications' %}">Back to Profile</a></button>
+
+
+    </form>
+</body>
+</html>

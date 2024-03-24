@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create Company Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Create Company Profile</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="company_name">Company Name:</label><br>
+            <input type="text" id="company_name" name="company_name" required><br>
+            <label for="industry">Industry:</label><br>
+            <input type="text" id="industry" name="industry" required><br>
+            <label for="location">Location:</label><br>
+            <input type="text" id="location" name="location" required><br>
+            <label for="website">Website:</label><br>
+            <input type="url" id="website" name="website" placeholder="https://example.com" required><br>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" required></textarea><br>
+            <input type="submit" value="Create Profile">
+        </form>
+    </div>
+</body>
+
+</html>

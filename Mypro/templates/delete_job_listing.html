@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Job Listing</title>
+</head>
+
+<body>
+    <h1>Delete Job Listing</h1>
+    <p>Are you sure you want to delete the following job listing?</p>
+    <p><strong>Title:</strong> {{ job_listing.title }}</p>
+    <p><strong>Description:</strong> {{ job_listing.description }}</p>
+    <p><strong>Required Qualifications:</strong> {{ job_listing.required_qualifications }}</p>
+    <p><strong>Desired Qualifications:</strong> {{ job_listing.desired_qualifications }}</p>
+    <p><strong>Responsibilities:</strong> {{ job_listing.responsibilities }}</p>
+    <p><strong>Application Deadline:</strong> {{ job_listing.application_deadline }}</p>
+    <p><strong>Salary Range:</strong> {{ job_listing.salary_range }}</p>
+    <p><strong>Location:</strong> {{ job_listing.location }}</p>
+    <p><strong>Employment Type:</strong> {{ job_listing.employment_type }}</p>
+    <p><strong>Company Benefits:</strong> {{ job_listing.company_benefits }}</p>
+    <p><strong>How to Apply:</strong> {{ job_listing.how_to_apply }}</p>
+    <!-- Add other job listing fields here -->
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+</body>
+
+</html>

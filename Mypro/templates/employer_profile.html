@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Employer Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Logout button styles */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #dc3545;
+            /* Red color */
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+            /* Dark red color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to the Job Portal, {{ username }}</h1>
+        <!-- Logout button -->
+        <a href="{% url 'logout' %}" class="button logout-btn">Logout</a><br>
+
+        <!-- Buttons/Links for Company Profile -->
+        <a href="{% url 'create_or_edit_company_profile' %}" class="button">Create Company Profile</a><br>
+
+        <!-- Buttons/Links for Job Listings -->
+        <a href="{% url 'create_job_listing' %}" class="button">Create Job Listing</a> <br>
+        <a href="{% url 'edit_job'  %}" class="button">Edit Job Listing</a><br>
+        <a href="{% url 'delete_job' %}" class="button">Delete Job Listing</a><br>
+
+        <!-- Buttons/Links for Job Listings -->
+        <a href="{% url 'job_listings' %}" class="button">View Job Listings</a><br>
+        <!-- Buttons/Links for Job Applications -->
+        <a href="{% url 'manage_job_applications' %}" class="button">Manage Job Applications</a><br>
+
+        <!-- Add more buttons or links for other features as needed -->
+    </div>
+</body>
+
+</html>

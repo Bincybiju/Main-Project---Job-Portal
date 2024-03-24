@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Job Seeker Profile</title>
+    <!-- Add your CSS stylesheets or links here -->
+</head>
+
+<body>
+    <h1>Job Seeker Profile</h1>
+
+    <div>
+        <p><strong>First Name:</strong> {{ profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ profile.last_name }}</p>
+        <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+        <p><strong>Address:</strong> {{ profile.address }}</p>
+        <p><strong>Skills:</strong> {{ profile.skills }}</p>
+        <p><strong>Degree:</strong> {{ profile.degree }}</p>
+        <p><strong>Degree Percentage:</strong> {{ profile.degree_percentage }}</p>
+        <!-- Add more profile details as needed -->
+    </div>
+
+    <!-- Display resume if available -->
+    {% if profile.resume %}
+    <p><strong>Resume:</strong>
+        <a href="{{ profile.resume.url }}">{{ profile.resume.name }}</a>
+    </p>
+    {% endif %}
+
+    <!-- Display job applications -->
+    <h2>Job Applications</h2>
+    <ul>
+        {% for application in job_applications %}
+        <li>
+            <strong>Job Title:</strong> {{ application.job.title }}<br>
+            <strong>Cover Letter:</strong> {{ application.cover_letter }}<br>
+            <strong>Experience:</strong> {{ application.experience }} years<br>
+            <strong>Applied At:</strong> {{ application.applied_at }}
+            <!-- Add more application details as needed -->
+        </li>
+        {% empty %}
+        <li>No job applications found.</li>
+        {% endfor %}
+    </ul>
+    <button><a href="{% url 'manage_job_applications' %}">Back to Profile</a></button>
+
+</body>
+
+</html>

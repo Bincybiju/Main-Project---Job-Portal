@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Seeker Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        p {
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        /* Logout button styles */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #dc3545; /* Red color */
+        }
+        .logout-btn:hover {
+            background-color: #c82333; /* Dark red color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Job Portal, {{ username }}</h1>        
+        <!-- Logout button -->
+        <a href="{% url 'logout' %}" class="button logout-btn">Logout</a><br>
+        
+        <!-- Buttons/Links for Profile Management -->
+
+        <a href="{% url 'edit_profile' %}" class="button">
+            {% if request.user.profile %}
+                Edit Profile
+            {% else %}
+                Complete Profile
+            {% endif %}
+        </a><br>        
+        <!-- Buttons/Links for Job Search and Listings -->
+        <a href="{% url 'search_jobs' %}" class="button">Search Jobs</a><br>
+        
+        <!-- Buttons/Links for Application Management -->
+        <a href="{% url 'apply_jobs' %}" class="button">Apply to Job</a><br>
+        <a href="{% url 'applied_jobs_status' %}" class="button">Applied Jobs/ Application Status</a><br>
+    
+    </div>
+</body>
+</html>

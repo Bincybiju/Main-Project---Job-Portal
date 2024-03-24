@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+</head>
+
+<body>
+    <h1>Edit Job Listings</h1>
+    <div class="employer-profile-link">
+        <a href="{% url 'employer_profile' %}">Back to Profile</a>
+    </div>
+    <ul>
+        {% for job in job_list %}
+        <li>
+            <h2>{{ job.title }}</h2>
+            <p><strong>Description:</strong> {{ job.description }}</p>
+            <p><strong>Required Qualifications:</strong> {{ job.required_qualifications }}</p>
+            <p><strong>Desired Qualifications:</strong> {{ job.desired_qualifications }}</p>
+            <p><strong>Responsibilities:</strong> {{ job.responsibilities }}</p>
+            <p><strong>Application Deadline:</strong> {{ job.application_deadline }}</p>
+            <p><strong>Salary Range:</strong> {{ job.salary_range }}</p>
+            <p><strong>Location:</strong> {{ job.location }}</p>
+            <p><strong>Employment Type:</strong> {{ job.employment_type }}</p>
+            <p><strong>Company Benefits:</strong> {{ job.company_benefits }}</p>
+            <p><strong>How to Apply:</strong> {{ job.how_to_apply }}</p>
+            <!-- Add more fields here -->
+        </li>
+        <button style="color: blue;"><a href="{% url 'edit_job_listing' job_id=job.id %}"
+                class="edit-button">Edit</a></button>
+
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>

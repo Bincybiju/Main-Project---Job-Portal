@@ -1,0 +1,8 @@
+1. Installation of MySQL Workbench and setup a local instance connection for hands on.
+
+2. Create a word documentation of Introduction to DBMS,RDMS 
+
+	- Include all points that we have discussed so far.
+	- Include additional important points from your research related to DBMS
+	- Include Advantages and disadvantages of DBMS and RDMS with examples
+	- Include different other types of normalization techniques.

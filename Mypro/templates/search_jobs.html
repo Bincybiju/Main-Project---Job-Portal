@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Jobs</title>
+    <!-- Add your CSS stylesheets or links here -->
+</head>
+<body>
+    <h1>Search Jobs</h1>
+    
+    <!-- Search Form -->
+    <form method="GET" action="{% url 'search_jobs' %}">
+        <input type="text" name="keyword" placeholder="Keyword">
+        <input type="text" name="location" placeholder="Location">
+        <input type="text" name="company_name" placeholder="Company">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Job Listings -->
+    <ul>
+        {% if job_listings %}
+            {% for job_listing in job_listings %}
+                <li>
+                    <strong>{{ job_listing.title }} - {{ job_listing.location }} - {{ job_listing.company.company_name }}</strong><br><br>
+                    <a href="{% url 'job_details' job_listing.id %}" class="button">View Details</a> <br> <br>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>No results found.</li>
+        {% endif %}
+    </ul>
+    <a href="{% url 'jobseeker_profile' %}" class="button">Back to Profile</a>
+
+</body>
+</html>

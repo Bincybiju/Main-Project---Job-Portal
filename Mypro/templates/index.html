@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url("{% static 'img/img6.png' %}") center center/cover no-repeat;
+            /* Use Django static tag to reference the image */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            /* Set full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: wheat;
+            /* Semi-transparent background */
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+        }
+
+        header a {
+            color: rgb(14, 8, 8);
+            text-decoration: none;
+            margin: 0 30px;
+            /* Adjust margin as needed */
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(255, 105, 115);
+        }
+
+        #register-options {
+            display: none;
+            /* Initially hide the register options */
+            position: absolute;
+            background-color: wheat;
+            padding: 10px;
+            /* border: 1px solid #ccc; */
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        #register:hover #register-options {
+            display: block;
+            /* Show the register options on hover */
+        }
+
+        #register-options a {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="{% url 'login_view' %}">Login</a>
+        <div id="register">
+            <a href="" id="register-link">Register</a>
+            <div id="register-options">
+                <a href="{% url 'job_seeker' %}">Job Seeker</a>
+                <a href="{% url 'employer' %}"> Employer</a>
+            </div>
+        </div>
+    </header>
+
+    <h1>Welcome to our Job Portal</h1>
+
+    <script>
+        document.getElementById("register-link").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent the default link behavior
+            var registerOptions = document.getElementById("register-options");
+            registerOptions.style.display = (registerOptions.style.display === "none") ? "block" : "none"; // Toggle display
+        });
+    </script>
+</body>
+
+</html>

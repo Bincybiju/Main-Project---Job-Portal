@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Listings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+        .company-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .company-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .company-item:last-child {
+            border-bottom: none;
+        }
+        .company-name {
+            font-weight: bold;
+        }
+        .company-actions {
+            margin-left: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <div class="container">        
+        <h2>Company Listings</h2>
+        <ul class="company-list">
+            {% for company in companies %}
+            <li class="company-item">
+                <span class="company-name"><h1>{{ company.company_name }}</h1></span>
+                <span class="company-actions">
+                    <a href="{% url 'company_jobs' company_id=company.id %}" class="button">View Jobs</a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <button><a href="{% url 'admin_profile' %}">Back to Profile</a></button>
+
+</center>
+</body>
+</html>

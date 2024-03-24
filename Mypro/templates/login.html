@@ -1,0 +1,121 @@
+<!-- templates/login.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            width: 80%; /* Adjust as needed */
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: brown;
+            margin-top: -10px;
+            margin-bottom: 20px; /* Adjust as needed */
+            text-align: left; /* Align heading to the left */
+        }
+
+        label {
+            text-align: left;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 18px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .p{
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 24px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;       
+        }
+
+        .forgot-password {
+            margin-top: -2px;
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            right: 550px;
+        }
+
+        .forgot-password h6 {
+            color: blue;
+            margin: 0;
+        }
+
+        .login-btn {
+            width: 100%; /* Full width */
+            background-color: brown;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .login-btn:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Sign In</h2>
+        <form action="{% url 'login_view' %}" method="post">
+            {% csrf_token %}
+            <!-- <label for="username">Username:</label>
+            <input type="text" id="email" name="email" placeholder="Enter username" required>
+
+            <label for="password">Password:</label>
+            <input class="p" type="password" id="password" name="password" placeholder="Enter password" required>
+
+            <button type="submit" class="login-btn">Login</button>
+
+            <div class="forgot-password">
+                <h6><a href="#">Forgot Password?</a></h6>
+            </div> -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br> <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br> <br>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+</body>
+</html>

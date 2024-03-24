@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Jobs</title>
+    <!-- Add your CSS stylesheets or links here -->
+</head>
+
+<body>
+    <h1>Apply Jobs</h1>
+
+    <!-- Job Listings -->
+    <ul>
+        {% if job_listings %}
+        {% for job_listing in job_listings %}
+        <li>
+            <strong>{{ job_listing.title }} - {{ job_listing.location }} - {{ job_listing.company.company_name}}</strong><br><br>
+            <a href="{% url 'job_details' job_listing.id %}" class="button">View Details</a> <br> <br>
+            <a href="{% url 'submit_job' job_listing.id %}" class="button">Apply
+
+            </a> <br> <br>
+
+        </li>
+        {% endfor %}
+        {% else %}
+        <li>No results found.</li>
+        {% endif %}
+    </ul>
+    <a href="{% url 'jobseeker_profile' %}" class="button">Back to Profile</a>
+
+</body>
+
+</html>

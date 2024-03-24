@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+        .employer-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .employer-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .employer-item:last-child {
+            border-bottom: none;
+        }
+        .employer-name {
+            font-weight: bold;
+        }
+        .employer-actions {
+            margin-left: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .delete-btn {
+            background-color: #dc3545; /* Red color */
+        }
+        .delete-btn:hover {
+            background-color: #c82333; /* Dark red color */
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <div class="container">        
+        <h2>Manage User Accounts</h2>
+        <ul class="employer-list">
+            {% for employer in registered_employers %}
+            <li class="employer-item">
+                <span class="employer-name">{{ employer.username }}</span>
+                <span class="employer-actions">
+                    <a href="{% url 'view_employer_profile' employer.id %}" class="button">View Profile</a>
+                    <a href="{% url 'delete_employer_account' employer.id %}" class="button delete-btn">Delete Account</a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <button><a href="{% url 'admin_profile' %}">Back to Profile</a></button>
+
+</center>
+</body>
+</html>

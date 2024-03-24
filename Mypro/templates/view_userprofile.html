@@ -1,0 +1,24 @@
+<!-- employer_profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Profile</title>
+</head>
+
+<body>
+
+    <!-- Company Profile -->
+    <h1>Company Profile</h1>
+    <p><strong>Company Name:</strong> {{ profile.company_name }}</p>
+    <p><strong>Industry:</strong> {{ profile.industry }}</p>
+    <p><strong>Description:</strong> {{ profile.description }}</p>
+    <p><strong>Website:</strong> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a></p>
+    <button><a href="{% url 'manage_accounts' %}">Back to Profile</a></button>
+    <!-- Add other company profile details here -->
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Logout button styles */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #dc3545;
+            /* Red color */
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+            /* Dark red color */
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="container">
+            <h1>Welcome, {{ username }}</h1>
+            <p>As an admin, you have access to:</p>
+
+            <!-- Logout button -->
+            <a href="{% url 'logout' %}" class="button logout-btn">Logout</a><br>
+
+            <!-- Buttons/Links for Managing User Accounts -->
+            <a href="{% url 'manage_accounts' %}" class="button">Manage User Accounts</a><br>
+
+            <!-- Buttons/Links for Monitoring and Moderating Job Listings -->
+            <a href="{% url 'manage_job_listings' %}" class="button">Monitor Job Listings</a><br>
+
+            <!-- Buttons/Links for Viewing Analytics and Reports -->
+            <a href="{% url 'view_reports' %}" class="button">Analytics/Reports</a><br>
+
+            <!-- Add more buttons or links for other admin features as needed -->
+        </div>
+    </center>
+</body>
+
+</html>
