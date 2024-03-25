@@ -61,8 +61,14 @@
         <a href="{% url 'logout' %}" class="button logout-btn">Logout</a><br>
 
         <!-- Buttons/Links for Company Profile -->
-        <a href="{% url 'create_or_edit_company_profile' %}" class="button">Create Company Profile</a><br>
-
+        <!-- <a href="{% url 'create_or_edit_company_profile' %}" class="button">Create Company Profile</a><br> -->
+        <a href="{% url 'create_or_edit_company_profile' %}" class="button">
+            {% if request.user.companyprofile %}
+                Edit Company Profile
+            {% else %}
+                Create Company Profile 
+            {% endif %} 
+            </a> <br>
         <!-- Buttons/Links for Job Listings -->
         <a href="{% url 'create_job_listing' %}" class="button">Create Job Listing</a> <br>
         <a href="{% url 'edit_job'  %}" class="button">Edit Job Listing</a><br>
