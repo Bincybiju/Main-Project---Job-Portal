@@ -6,11 +6,11 @@ User = get_user_model()
 
 class CompanyProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,default=0)
-    company_name = models.CharField(max_length=100,default=0)
-    industry = models.CharField(max_length=100,default=0)
-    location = models.CharField(max_length=100,default=0)
-    website = models.URLField(default=0)
-    description = models.TextField(default=0)
+    company_name = models.CharField(max_length=100,default='')
+    industry = models.CharField(max_length=100,default='')
+    location = models.CharField(max_length=100,default='')
+    website = models.URLField(default='')
+    description = models.TextField(default='')
 
 class JobListing(models.Model):
     company = models.ForeignKey(CompanyProfile, on_delete=models.CASCADE)
