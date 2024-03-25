@@ -7,28 +7,33 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 User = get_user_model()
+
 @login_required
 def create_or_edit_company_profile(request):
     try:
-        # Check if the company profile already exists for the current user
+        # Try to retrieve the existing company profile for the current user
         profile = request.user.companyprofile
         editing = True
-        # Redirect to a different view or display a message indicating that the profile already exists
-        return HttpResponse('<script>alert("Company profile already created."); window.location.replace("/employer_profile");</script>')
     except CompanyProfile.DoesNotExist:
+        # If the company profile does not exist, set profile to None
         profile = None
         editing = False
 
     if request.method == 'POST':
+        # If it's a POST request, initialize the form with the profile data if exists
         form = CompanyProfileForm(request.POST, instance=profile)
         if form.is_valid():
+            # If the form is valid, save the profile
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return HttpResponse('<script>alert("Company profile created successfully."); window.location.replace("/employer_profile");</script>')
+            # Redirect to the employer profile page
+            return redirect('employer_profile')
     else:
+        # If it's a GET request, initialize the form with the profile data if exists
         form = CompanyProfileForm(instance=profile)
 
+    # Render the form template
     return render(request, 'create_cprofile.html', {'form': form, 'editing': editing})
 
 @login_required
