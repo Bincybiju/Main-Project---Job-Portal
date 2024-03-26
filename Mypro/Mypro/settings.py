@@ -135,3 +135,22 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+import environ
+
+# Initialize environ
+env = environ.Env()
+
+# Reading .env file
+environ.Env.read_env()
+
+# Set email backend to use Mailtrap SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = 'e0ae801cad7069'
+EMAIL_HOST_PASSWORD = 'acb5a38e4354f3'
+EMAIL_USE_TLS = True  # Mailtrap requires TLS
