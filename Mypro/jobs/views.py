@@ -6,6 +6,8 @@ from .forms import *
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.core.mail import send_mail
+
 User = get_user_model()
 
 @login_required
@@ -270,9 +272,7 @@ def apply_jobs(request):
 
 @login_required
 def submit_job(request, job_id):
-    # Check if the user is authenticated
     if request.user.is_authenticated:
-        # Check if the user has already applied for the job
         existing_application = JobApplication.objects.filter(user=request.user, job_id=job_id).exists()
         if existing_application:
             return HttpResponse('<script>alert("You have already applied for this job."); window.location.replace("/apply_jobs");</script>')
@@ -280,19 +280,34 @@ def submit_job(request, job_id):
             if request.method == 'POST':
                 form = JobApplicationForm(request.POST, request.FILES)
                 if form.is_valid():
-                    # Associate the job application with the currently logged-in user
                     job_application = form.save(commit=False)
                     job_application.user = request.user
                     job_application.job_id = job_id
                     job_application.save()
+
+                    # Send email to job seeker
+                    job_seeker_email = request.user.email
+                    subject_seeker = 'Job Application Confirmation'
+                    message_seeker = f"Dear {request.user.username},\n\nThank you for applying for the job. Your application has been received successfully.\n\nBest regards,\nYour Company Name"
+                    send_mail(subject_seeker, message_seeker, 'your@example.com', [job_seeker_email])
+
+                    # Send email to employer
+                    employer_email = job_application.job.company.user.email
+                    subject_employer = 'New Job Application Received'
+                    message_employer = f"Dear Employer,\n\nA new job application has been received for the following position:\n\n"
+                    message_employer += f"Job Title: {job_application.job.title}\n"
+                    message_employer += f"Applicant: {request.user.username} (Email: {request.user.email})\n\n"
+                    message_employer += "Please take necessary action.\n\nBest regards,\nYour Company Name"
+                    send_mail(subject_employer, message_employer, 'your@example.com', [employer_email])
+
                     return HttpResponse('<script>alert("Job applied successfully."); window.location.replace("/apply_jobs");</script>')
             else:
                 form = JobApplicationForm()
             return render(request, 'submit_job.html', {'form': form})
     else:
-        # Redirect the user to the login page if they are not authenticated
         return redirect('login')
 
+    
 @login_required
 def manage_job_applications(request):
     try:
