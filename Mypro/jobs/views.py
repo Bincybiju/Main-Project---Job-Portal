@@ -269,7 +269,6 @@ def apply_jobs(request):
     job_listings = JobListing.objects.all()
     return render(request, 'apply_jobs.html', {'job_listings': job_listings})
 
-
 @login_required
 def submit_job(request, job_id):
     if request.user.is_authenticated:
@@ -284,21 +283,25 @@ def submit_job(request, job_id):
                     job_application.user = request.user
                     job_application.job_id = job_id
                     job_application.save()
-
+                    
+                    # Retrieve the job listing to get the associated company name
+                    job_listing = get_object_or_404(JobListing, pk=job_id)
+                    company_name = job_listing.company.company_name  # Retrieve the company name
+                    
                     # Send email to job seeker
                     job_seeker_email = request.user.email
                     subject_seeker = 'Job Application Confirmation'
-                    message_seeker = f"Dear {request.user.username},\n\nThank you for applying for the job. Your application has been received successfully.\n\nBest regards,\nYour Company Name"
-                    send_mail(subject_seeker, message_seeker, 'your@example.com', [job_seeker_email])
+                    message_seeker = f"Dear {request.user.username},\n\nThank you for applying for the job. Your application has been received successfully.\n\nBest regards,\n{company_name}"
+                    send_mail(subject_seeker, message_seeker, 'jobportal@gmail.com', [job_seeker_email])
 
                     # Send email to employer
-                    employer_email = job_application.job.company.user.email
+                    employer_email = job_listing.company.user.email
                     subject_employer = 'New Job Application Received'
                     message_employer = f"Dear Employer,\n\nA new job application has been received for the following position:\n\n"
-                    message_employer += f"Job Title: {job_application.job.title}\n"
+                    message_employer += f"Job Title: {job_listing.title}\n"
                     message_employer += f"Applicant: {request.user.username} (Email: {request.user.email})\n\n"
-                    message_employer += "Please take necessary action.\n\nBest regards,\nYour Company Name"
-                    send_mail(subject_employer, message_employer, 'your@example.com', [employer_email])
+                    message_employer += "Please take necessary action.\n\nBest regards,\n" + company_name
+                    send_mail(subject_employer, message_employer, 'jobportal@gmail.com', [employer_email])
 
                     return HttpResponse('<script>alert("Job applied successfully."); window.location.replace("/apply_jobs");</script>')
             else:
