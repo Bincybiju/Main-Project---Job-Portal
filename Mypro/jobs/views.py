@@ -7,6 +7,8 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
+from django.contrib import messages
+from .models import Issue
 
 User = get_user_model()
 
@@ -253,9 +255,6 @@ def job_details(request, job_id):
     job = get_object_or_404(JobListing, pk=job_id)  # Retrieve job details by ID
     return render(request, 'job_details.html', {'job': job})
 
-
-
-
 @login_required
 def apply_jobs(request):
     try:
@@ -367,3 +366,21 @@ def view_reports(request):
     ).values('company__company_name', 'title', 'num_applicants', 'num_accepted', 'num_rejected')
 
     return render(request, 'analytics.html', {'job_reports': job_reports})
+
+@login_required
+def report_issue(request):
+    if request.method == 'POST':
+        issue_description = request.POST.get('issue_description', '')
+        if issue_description:
+            # Create a new issue object and save it
+            new_issue = Issue(description=issue_description, user=request.user)
+            new_issue.save()
+            messages.success(request, 'Issue reported successfully.')
+            return redirect('jobseeker_profile')  # Redirect to homepage or any other appropriate page
+        else:
+            messages.error(request, 'Please provide a description of the issue.')
+    return render(request, 'report_issue.html')
+
+def reported_issues(request):
+    reported_issues = Issue.objects.all()  # Fetch all reported issues
+    return render(request, 'reported_issues.html', {'reported_issues': reported_issues})
