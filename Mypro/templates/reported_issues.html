@@ -1,0 +1,27 @@
+<!-- custom_admin.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Admin Page</title>
+</head>
+<body>    
+    <!-- Other admin functionalities -->
+    
+    <h2>Reported Issues</h2>
+    <ul>
+        {% for issue in reported_issues %}
+            <li><strong>Username:</strong> {{ issue.user.username }}</li>
+            <ul>
+                <li><strong>Issue:</strong> {{ issue.description }}</li>
+            </ul>
+        {% empty %}
+            <li>No reported issues</li>
+        {% endfor %}
+    </ul>
+    <button><a href="{% url 'admin_profile' %}">Back to Profile</a></button>
+
+</body>
+</html>
