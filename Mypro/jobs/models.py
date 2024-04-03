@@ -56,3 +56,9 @@ class JobApplication(models.Model):
     applied_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
 
+class Issue(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField()
+    reported_at = models.DateTimeField(auto_now_add=True)
+
+    
